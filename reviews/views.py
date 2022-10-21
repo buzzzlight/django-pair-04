@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import CommentForm, ReviewForm
 from .models import Review
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 # Create your views here.
 @login_required
@@ -48,8 +49,11 @@ def delete(request, pk):
 
 
 def index(request):
-    reviews = Review.objects.all()
-    context = {"reviews": reviews}
+    page = request.GET.get("page", "1")
+    reviews = Review.objects.order_by("-created_at")
+    paginator = Paginator(reviews, 12)
+    page_obj = paginator.get_page(page)
+    context = {"reviews": page_obj}
     return render(request, "reviews/index.html", context)
 
 
