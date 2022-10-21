@@ -17,3 +17,9 @@ def create(request):
         review_form = ReviewForm()
     context = {"review_form": review_form}
     return render(request, "reviews/create.html", context=context)
+
+
+def index(request):
+    reviews = Review.objects.all()
+    context = {"reviews": reviews}
+    return render(request, "reviews/index.html", context)
