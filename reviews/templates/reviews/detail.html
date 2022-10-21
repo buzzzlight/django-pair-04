@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<div class="m-3">
+  <h1>글 조회</h1>
+  <hr>
+  <h3>제목: {{review.title}}</h3>
+  <h4>영화: {{review.movie_name}}</h4>
+  <p>평점: {{review.grade}}</p>
+  <p>작성자: {{review.user}}</p>
+  {% if review.image %}
+  <img src="{{ review.image.url }}" width="400" alt="...">
+  {% endif %}
+  <p>{{review.content}}</p>
+</div>
+<div class="d-grid gap-2 d-flex justify-content-end">
+  {% if request.user == review.user %}
+  <a href="" class="btn btn-primary">수정</a>
+  <form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="삭제" class="btn btn-danger">
+  </form>
+  {% endif %}
+</div>
+
+{% endblock %}
