@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+  
+{% block content %}
+<div class="d-flex container my-5">
+  <div class="col-3">
+    <table class="table me-5">
+      <tbody>
+        <tr>
+          <th>메일 쓰기</th>
+        </tr>
+        <tr>
+          <th>받은 메일함</th>
+        </tr>
+        <tr>
+          <th>보낸 메일함</th>
+        </tr>
+        <tr>
+          <th>보관함</th>
+        </tr> 
+        <tr>
+          <th>휴지통</th>
+        </tr>   
+      </tbody>
+    </table>
+  </div>
+  <div class="col-9">
+    <table class="table ms-5">
+      <thead>
+        <tr>
+          <th scope="col">보관</th>
+          <th scope="col">보낸 사람</th>
+          <th scope="col">제목</th>
+          <th scope="col">받은 시간</th>
+          <th scope="col">삭제</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td colspan="2">Larry the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock content %}
