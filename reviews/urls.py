@@ -16,4 +16,5 @@ urlpatterns = [
         views.comment_delete,
         name="comment_delete",
     ),
+    path('search/', views.search, name='search'),
 ]

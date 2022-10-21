@@ -19,6 +19,8 @@
     </div>
   </div>
   {% endfor %}
+  <h1 class="my-5 text-center">{{ text }}</h1>
+
   <!--페이징-->
   <ul class="pagination pagination justify-content-center">
     <!--이전페이지-->
@@ -60,5 +62,4 @@
     <a href="{% url 'reviews:create' %}" class="btn btn-primary">글쓰기</a>
   </div>
 </div>
-
 {% endblock %}
