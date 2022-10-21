@@ -88,3 +88,26 @@ def comment_delete(request, review_pk, comment_pk):
         if request.method == "POST":
             comment.delete()
     return redirect("reviews:detail", review.pk)
+
+def search(request):
+    search = request.GET.get("search")
+    page = request.GET.get("page", "1")
+    reviews = Review.objects.filter(title__contains=search).order_by("-created_at")
+    paginator = Paginator(reviews, 12)
+    page_obj = paginator.get_page(page)
+    if  len(search) == 0:
+        reviews = []
+        text = "검색어를 입력하세요."
+
+    elif len(reviews) == 0:
+        text = "검색 결과가 없습니다."
+        
+    else:
+        print(reviews)
+        text = ""
+        
+    context = {
+        "reviews" : page_obj,
+        "text" : text,
+    }
+    return render(request, 'reviews/index.html', context)
