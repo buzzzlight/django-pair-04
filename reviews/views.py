@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import ReviewForm
+from .forms import CommentForm, ReviewForm
 from .models import Review
 from django.contrib.auth.decorators import login_required
 
@@ -55,8 +55,23 @@ def index(request):
 
 def detail(request, pk):
     review = Review.objects.get(pk=pk)
-
+    comment_form = CommentForm()
+    comments = review.comment_set.all()
     context = {
         "review": review,
+        "comment_form": comment_form,
+        "comments": comments,
     }
     return render(request, "reviews/detail.html", context)
+
+
+# comments
+def comment_create(request, pk):
+    review = Review.objects.get(pk=pk)
+    comment_form = CommentForm(request.POST)
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.review = review
+        comment.user = request.user
+        comment.save()
+    return redirect("reviews:detail", review.pk)
