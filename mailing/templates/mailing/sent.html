@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
-
+  
 {% block content %}
 <div class="d-flex container my-5">
   <div class="col-3">
@@ -20,19 +20,31 @@
         </tr> 
         <tr>
           <th><a href="{% url 'mailing:bin' %}">휴지통</a></th>
-        </tr>   
+        </tr>
       </tbody>
     </table>
   </div>
   <div class="col-9">
-    <form action="" method="POST">
-      {% csrf_token %}
-      {% bootstrap_form form %}
-      <div class="text-end">
-      {% bootstrap_button button_type='submit' content='보내기' %}
-      </div>
-    </form>
+    <table class="table ms-5">
+      <thead>
+        <tr>
+          <th scope="col">받는 사람</th>
+          <th scope="col">제목</th>
+          <th scope="col">보낸 시간</th>
+          <th scope="col">삭제</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for mail in mail %}
+        <tr>
+          <th>{{ mail.from_name }}</th>
+          <td>{{ mail.title }}</td>
+          <td>{{ mail.created_at }}</td>
+          <td>삭제</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 </div>
-
 {% endblock content %}
