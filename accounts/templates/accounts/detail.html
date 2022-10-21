@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ user.username }}님의 프로필 입니다.</h1>
+<a class="btn btn-success" href="{% url 'accounts:update' user.pk %}">수정하기</a>
+{% endblock %}
