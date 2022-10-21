@@ -26,8 +26,14 @@
 <!--comment-->
 <h3>댓글 ({{comments.count}})</h3>
 {% for comment in comments %}
-  <div>
+  <div class="d-flex flex-row justify-content-between">
     <p><a href="{% url 'accounts:detail' comment.user.id %}" class="text-decoration-none">{{comment.user}}</a> | {{comment.content}}</p>
+    {% if request.user == comment.user %}
+    <form action="{% url 'reviews:comment_delete' review.id comment.id %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="삭제" class="btn btn-outline-danger">
+    </form>
+    {% endif %}
   </div>
 {% empty%}
   <p>첫 댓글을 작성해주세요</p>
@@ -38,5 +44,7 @@
   {% bootstrap_form comment_form %}
   {% bootstrap_button button_type="submit" content="작성"%}
 </form>
+{% else %}
+<p><a href="{% url 'accounts:login' %}" class="text-decoration-none">로그인</a>을 하면 댓글을 작성할 수 있습니다.</p>
 {% endif %}
 {% endblock %}
