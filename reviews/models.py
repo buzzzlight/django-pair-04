@@ -22,3 +22,9 @@ class Review(models.Model):
         format="JPEG",
         options={"quality": 80},
     )
+
+
+class Comment(models.Model):
+    review = models.ForeignKey(Review, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    content = models.CharField(max_length=80)
