@@ -15,7 +15,7 @@
 </div>
 <div class="d-grid gap-2 d-flex justify-content-end">
   {% if request.user == review.user %}
-  <a href="" class="btn btn-primary">수정</a>
+  <a href="{% url 'reviews:update' review.id %}" class="btn btn-primary">수정</a>
   <form action="" method="POST">
     {% csrf_token %}
     <input type="submit" value="삭제" class="btn btn-danger">
