@@ -31,7 +31,6 @@
           <th scope="col">받는 사람</th>
           <th scope="col">제목</th>
           <th scope="col">보낸 시간</th>
-          <th scope="col">삭제</th>
         </tr>
       </thead>
       <tbody>
@@ -40,7 +39,6 @@
           <th>{{ mail.from_name }}</th>
           <td>{{ mail.title }}</td>
           <td>{{ mail.created_at }}</td>
-          <td>삭제</td>
         </tr>
         {% endfor %}
       </tbody>

@@ -19,12 +19,17 @@ def create(request):
     to_info = get_user_model().objects.get(pk=request.user.id)
     if form.is_valid():
         from_info = get_user_model().objects.get(email=request.POST["to_email"])
-        for i in from_info:
-            temp = form.save(commit=False)
-            temp.recipient_id = i.id
-            temp.from_name = to_info.username
-            temp.from_email = to_info.email
-            temp.save()
+        # for i in from_info:
+        #     temp = form.save(commit=False)
+        #     temp.recipient_id = i.id
+        #     temp.from_name = to_info.username
+        #     temp.from_email = to_info.email
+        #     temp.save()
+        temp = form.save(commit=False)
+        temp.recipient_id = from_info.id
+        temp.from_name = to_info.username
+        temp.from_email = to_info.email
+        temp.save()
         return redirect("mailing:index")
     context = {
         "form": form,
