@@ -36,6 +36,17 @@ def update(request, pk):
         return redirect("reviews:detail", review.pk)
 
 
+@login_required
+def delete(request, pk):
+    review = Review.objects.get(pk=pk)
+    if request.user == review.user:
+        if request.method == "POST":
+            review.delete()
+            return redirect("reviews:index")
+    else:
+        return redirect("reviews:detail", review.pk)
+
+
 def index(request):
     reviews = Review.objects.all()
     context = {"reviews": reviews}
