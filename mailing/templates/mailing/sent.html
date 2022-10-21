@@ -37,7 +37,7 @@
         {% for mail in mail %}
         <tr>
           <th>{{ mail.from_name }}</th>
-          <td>{{ mail.title }}</td>
+          <td><a href="{% url 'mailing:detail' mail.pk %}" class="fw-bold">{{ mail.title }}</a></td>
           <td>{{ mail.created_at }}</td>
         </tr>
         {% endfor %}
