@@ -25,14 +25,11 @@
     </table>
   </div>
   <div class="col-9">
-    <form action="" method="POST">
-      {% csrf_token %}
-      {% bootstrap_form form %}
-      <div class="text-end">
-      {% bootstrap_button button_type='submit' content='보내기' %}
-      </div>
-    </form>
+    <h5 class="mb-3">보낸 사람 : {{ mail.from_name }}</h5>
+    <h5 class="mb-3">받은 시간 : {{ mail.created_at|date:'y년 m월 d일 H시 m분' }}</h5>
+    <h5 class="mb-3">제목 : {{ mail.title }}</h5>
+    <h5 class="mb-3">내용 : {{ mail.content }}</h5>
+  </div>
   </div>
 </div>
-
 {% endblock content %}
