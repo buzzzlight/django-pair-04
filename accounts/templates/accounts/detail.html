@@ -1,5 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>{{ user.username }}님의 프로필 입니다.</h1>
-<a class="btn btn-success" href="{% url 'accounts:update' user.pk %}">수정하기</a>
+<div class="mt-3 card p-5 border border-4 border-warning rounded-3">
+  <h1 class="mb-3">{{ account_detail.username }}님의 프로필 입니다.</h1>
+  <h3>이름 : {{ account_detail.last_name }}{{ account_detail.first_name }}</h3>
+  <h3>email : {{ account_detail.email }}</h3>
+  <div class="text-end">
+    <a class="btn btn-success" href="{% url 'accounts:update' user.pk %}">수정하기</a>
+  </div>
+  <div class="row">
+    <div class="col-6">
+        <h3>작성한 글</h3>
+        <p class="text-muted">{{ account_detail.review_set.count }}개를 작성하였습니다.</p>
+        {% for article in account_detail.review_set.all %}
+        <p>
+            {{ forloop.counter }}
+            <a class="text-decoration-none text-dark" href="{% url 'reviews:detail' article.pk %}">{{ article.title }}</a>
+        </p>
+        {% endfor %}
+    </div>
+  </div>
+</div>
 {% endblock %}
