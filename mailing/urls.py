@@ -7,7 +7,6 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("create/", views.create, name="create"),
     path("detail/", views.detail, name="include"),
-    path("<int:pk>/sending", views.sending, name="sending"),
     path("sent/", views.sent, name="sent"),
     path("bin/", views.bin, name="bin"),
     path("important/", views.important, name="important"),

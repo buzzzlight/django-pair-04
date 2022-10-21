@@ -33,26 +33,6 @@ def create(request):
 
 
 @login_required
-def sending(request, pk):
-    from_info = get_user_model().objects.get(pk=pk)
-    form = MailingForm(request.POST or None, initial={"to_email": from_info.email})
-    to_info = get_user_model().objects.get(pk=request.user.id)
-    if form.is_valid():
-        from_info = get_user_model().objects.filter(email=request.POST["to_email"])
-        for i in from_info:
-            temp = form.save(commit=False)
-            temp.recipient_id = i.id
-            temp.from_name = to_info.username
-            temp.from_email = to_info.email
-            temp.save()
-        return redirect("mailing:index")
-    context = {
-        "form": form,
-    }
-    return render(request, "mailing/create.html", context)
-
-
-@login_required
 def detail(request, pk):
     mail = Mailing.objects.get(pk=pk)
     if not mail.read:
