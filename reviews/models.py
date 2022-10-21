@@ -22,6 +22,8 @@ class Review(models.Model):
         format="JPEG",
         options={"quality": 80},
     )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class Comment(models.Model):
